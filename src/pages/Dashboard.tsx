@@ -72,7 +72,7 @@ export function Dashboard() {
   };
 
   return (
-    <div className="min-h-screen bg-warm-beige pt-20 pb-12">
+    <div className="min-h-screen bg-warm-beige pt-20 pb-12 overflow-x-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Welcome Header */}
         <div className="mb-6 sm:mb-8">
@@ -84,7 +84,6 @@ export function Dashboard() {
           </p>
         </div>
 
-        {/* Quick Stats */}
         {/* Quick Stats */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
           <Card className="bg-white border-0 shadow-card card-hover">
@@ -157,7 +156,7 @@ export function Dashboard() {
         </div>
 
         {/* Main Content Grid */}
-        <div className="grid lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 lg:gap-6">
           {/* Today's Checklist */}
           <div className="lg:col-span-2">
             <Card className="bg-white border-0 shadow-card">
