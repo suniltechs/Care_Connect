@@ -1,0 +1,266 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* CareConnect Color Palette - Soft, soothing tones */
+    --lavender: 278 14% 62%;
+    --soft-blue: 200 32% 74%;
+    --mint-green: 152 28% 78%;
+    --warm-beige: 30 24% 95%;
+    --charcoal: 0 0% 24%;
+    --medium-gray: 0 0% 42%;
+    --light-gray: 30 12% 90%;
+    --off-white: 40 20% 98%;
+    --soft-coral: 15 55% 78%;
+    --pale-yellow: 42 55% 88%;
+    --deep-lavender: 278 12% 47%;
+    
+    /* shadcn theme mappings */
+    --background: 40 20% 98%;
+    --foreground: 0 0% 24%;
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 24%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 24%;
+    --primary: 278 14% 62%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 200 32% 74%;
+    --secondary-foreground: 0 0% 24%;
+    --muted: 30 24% 95%;
+    --muted-foreground: 0 0% 42%;
+    --accent: 152 28% 78%;
+    --accent-foreground: 0 0% 24%;
+    --destructive: 15 55% 78%;
+    --destructive-foreground: 0 0% 24%;
+    --border: 30 12% 90%;
+    --input: 30 12% 90%;
+    --ring: 278 14% 62%;
+    --radius: 0.75rem;
+    --sidebar-background: 0 0% 100%;
+    --sidebar-foreground: 0 0% 24%;
+    --sidebar-primary: 278 14% 62%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 30 24% 95%;
+    --sidebar-accent-foreground: 0 0% 24%;
+    --sidebar-border: 30 12% 90%;
+    --sidebar-ring: 278 14% 62%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  }
+}
+
+@layer utilities {
+  /* Custom color utilities */
+  .bg-lavender { background-color: hsl(var(--lavender)); }
+  .bg-soft-blue { background-color: hsl(var(--soft-blue)); }
+  .bg-mint { background-color: hsl(var(--mint-green)); }
+  .bg-warm-beige { background-color: hsl(var(--warm-beige)); }
+  .bg-off-white { background-color: hsl(var(--off-white)); }
+  .bg-soft-coral { background-color: hsl(var(--soft-coral)); }
+  .bg-pale-yellow { background-color: hsl(var(--pale-yellow)); }
+  .bg-deep-lavender { background-color: hsl(var(--deep-lavender)); }
+  
+  .text-lavender { color: hsl(var(--lavender)); }
+  .text-soft-blue { color: hsl(var(--soft-blue)); }
+  .text-mint { color: hsl(var(--mint-green)); }
+  .text-warm-beige { color: hsl(var(--warm-beige)); }
+  .text-charcoal { color: hsl(var(--charcoal)); }
+  .text-medium-gray { color: hsl(var(--medium-gray)); }
+  .text-deep-lavender { color: hsl(var(--deep-lavender)); }
+  
+  .border-lavender { border-color: hsl(var(--lavender)); }
+  .border-soft-blue { border-color: hsl(var(--soft-blue)); }
+  
+  /* Shadow utilities */
+  .shadow-card {
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.07), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+  }
+  
+  .shadow-card-hover {
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.05);
+  }
+  
+  .shadow-glow {
+    box-shadow: 0 0 20px rgba(155, 138, 165, 0.15);
+  }
+  
+  /* Animation utilities */
+  .animate-fade-in {
+    animation: fadeIn 0.5s ease-out forwards;
+  }
+  
+  .animate-fade-up {
+    animation: fadeUp 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+  }
+  
+  .animate-slide-in-right {
+    animation: slideInRight 0.3s ease-out forwards;
+  }
+  
+  .animate-pulse-soft {
+    animation: pulseSoft 2s ease-in-out infinite;
+  }
+  
+  .animate-breathe {
+    animation: breathe 4s ease-in-out infinite;
+  }
+  
+  /* Stagger delays */
+  .delay-100 { animation-delay: 100ms; }
+  .delay-200 { animation-delay: 200ms; }
+  .delay-300 { animation-delay: 300ms; }
+  .delay-400 { animation-delay: 400ms; }
+  .delay-500 { animation-delay: 500ms; }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes fadeUp {
+  from { 
+    opacity: 0; 
+    transform: translateY(20px); 
+  }
+  to { 
+    opacity: 1; 
+    transform: translateY(0); 
+  }
+}
+
+@keyframes slideInRight {
+  from { 
+    opacity: 0; 
+    transform: translateX(20px); 
+  }
+  to { 
+    opacity: 1; 
+    transform: translateX(0); 
+  }
+}
+
+@keyframes pulseSoft {
+  0%, 100% { 
+    opacity: 1; 
+    transform: scale(1); 
+  }
+  50% { 
+    opacity: 0.8; 
+    transform: scale(1.02); 
+  }
+}
+
+@keyframes breathe {
+  0%, 100% { 
+    transform: scale(1); 
+  }
+  50% { 
+    transform: scale(1.1); 
+  }
+}
+
+/* Card hover effect */
+.card-hover {
+  transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94), 
+              box-shadow 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.card-hover:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.05);
+}
+
+/* Button hover effect */
+.btn-hover {
+  transition: transform 0.2s ease-out, box-shadow 0.2s ease-out;
+}
+
+.btn-hover:hover {
+  transform: scale(1.02);
+}
+
+/* Link underline animation */
+.link-underline {
+  position: relative;
+}
+
+.link-underline::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background-color: hsl(var(--lavender));
+  transition: width 0.2s ease-out;
+}
+
+.link-underline:hover::after {
+  width: 100%;
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+/* Focus styles for accessibility */
+:focus-visible {
+  outline: 2px solid hsl(var(--lavender));
+  outline-offset: 2px;
+}
+
+  /* Custom scrollbar */
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: hsl(var(--warm-beige));
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: hsl(var(--lavender) / 0.5);
+    border-radius: 4px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: hsl(var(--lavender));
+  }
+
+  .scrollbar-none {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  .scrollbar-none::-webkit-scrollbar {
+    display: none;
+  }
