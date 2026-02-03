@@ -13,12 +13,14 @@ import {
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { useState } from "react";
+import { AuthModal } from "@/components/auth/AuthModal";
 
 interface LandingPageProps {
   onGetStarted: () => void;
 }
 
 const navLinks = [
+  { label: "Dashboard", href: "#" },
   { label: "Features", href: "#features" },
   { label: "About", href: "#about" },
   { label: "Support", href: "#support" },
@@ -76,6 +78,13 @@ const stats = [
 export function LandingPage({ onGetStarted }: LandingPageProps) {
   const heroRef = useRef<HTMLDivElement>(null);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
+  const [authView, setAuthView] = useState<"login" | "signup">("signup");
+
+  const handleAuthOpen = (view: "login" | "signup") => {
+    setAuthView(view);
+    setIsAuthModalOpen(true);
+  };
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -118,6 +127,12 @@ export function LandingPage({ onGetStarted }: LandingPageProps) {
                 <a
                   key={link.label}
                   href={link.href}
+                  onClick={(e) => {
+                    if (link.label === "Dashboard") {
+                      e.preventDefault();
+                      onGetStarted();
+                    }
+                  }}
                   className="text-charcoal hover:text-lavender transition-colors font-medium"
                 >
                   {link.label}
@@ -128,7 +143,14 @@ export function LandingPage({ onGetStarted }: LandingPageProps) {
             {/* CTA Button & Mobile Menu */}
             <div className="flex items-center gap-4">
               <Button
-                onClick={onGetStarted}
+                variant="ghost"
+                onClick={() => handleAuthOpen("login")}
+                className="hidden sm:flex text-charcoal hover:text-lavender transition-colors font-medium"
+              >
+                Login
+              </Button>
+              <Button
+                onClick={() => handleAuthOpen("signup")}
                 className="hidden sm:flex bg-lavender hover:bg-deep-lavender text-white rounded-full px-6"
               >
                 Get Started
@@ -147,16 +169,32 @@ export function LandingPage({ onGetStarted }: LandingPageProps) {
                       <a
                         key={link.label}
                         href={link.href}
-                        onClick={() => setIsMobileMenuOpen(false)}
+                        onClick={(e) => {
+                          setIsMobileMenuOpen(false);
+                          if (link.label === "Dashboard") {
+                            e.preventDefault();
+                            onGetStarted();
+                          }
+                        }}
                         className="text-lg font-medium text-charcoal hover:text-lavender p-2"
                       >
                         {link.label}
                       </a>
                     ))}
                     <Button
+                      variant="ghost"
                       onClick={() => {
                         setIsMobileMenuOpen(false);
-                        onGetStarted();
+                        handleAuthOpen("login");
+                      }}
+                      className="text-lg font-medium text-charcoal hover:text-lavender p-2 justify-start"
+                    >
+                      Login
+                    </Button>
+                    <Button
+                      onClick={() => {
+                        setIsMobileMenuOpen(false);
+                        handleAuthOpen("signup");
                       }}
                       className="bg-lavender hover:bg-deep-lavender text-white rounded-full mt-4"
                     >
@@ -173,7 +211,7 @@ export function LandingPage({ onGetStarted }: LandingPageProps) {
       {/* Hero Section */}
       <section
         ref={heroRef}
-        className="relative min-h-screen flex items-center pt-32"
+        className="relative min-h-screen flex items-center pt-[40px]"
         style={{
           background:
             "linear-gradient(135deg, #F5F1ED 0%, #FAF9F7 50%, #F5F1ED 100%)",
@@ -182,7 +220,7 @@ export function LandingPage({ onGetStarted }: LandingPageProps) {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-20">
           <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
             {/* Content */}
-            <div className="space-y-8">
+            <div className="space-y-10">
               <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-lavender/10 text-lavender text-sm font-medium animate-fade-in">
                 <Heart className="w-4 h-4" />
                 <span>Compassionate Care Support</span>
@@ -201,7 +239,7 @@ export function LandingPage({ onGetStarted }: LandingPageProps) {
 
               <div className="flex flex-col sm:flex-row gap-4">
                 <Button
-                  onClick={onGetStarted}
+                  onClick={() => handleAuthOpen("signup")}
                   className="bg-lavender hover:bg-deep-lavender text-white px-8 py-6 text-lg rounded-full btn-hover shadow-glow w-full sm:w-auto"
                 >
                   Get Started
@@ -242,7 +280,7 @@ export function LandingPage({ onGetStarted }: LandingPageProps) {
                 <img
                   src="/hero-image.jpg"
                   alt="Caregiver supporting elderly person with compassion"
-                  className="w-full h-auto object-cover"
+                  className="w-full h-[550px] object-cover"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-lavender/20 to-transparent" />
               </div>
@@ -365,7 +403,7 @@ export function LandingPage({ onGetStarted }: LandingPageProps) {
                 between. We're here to support you every step of the way.
               </p>
               <Button
-                onClick={onGetStarted}
+                onClick={() => handleAuthOpen("signup")}
                 className="bg-lavender hover:bg-deep-lavender text-white px-8 py-6 text-lg rounded-full btn-hover"
               >
                 Start Your Journey
@@ -389,7 +427,7 @@ export function LandingPage({ onGetStarted }: LandingPageProps) {
               and community through CareConnect.
             </p>
             <Button
-              onClick={onGetStarted}
+              onClick={() => handleAuthOpen("signup")}
               className="bg-white text-lavender hover:bg-off-white px-10 py-6 text-lg rounded-full btn-hover shadow-lg"
             >
               Get Started Free
@@ -403,18 +441,18 @@ export function LandingPage({ onGetStarted }: LandingPageProps) {
       </section>
 
       {/* Footer */}
-      <footer className="bg-charcoal text-white py-16">
+      <footer className="bg-charcoal text-lavender py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12">
             {/* Brand */}
             <div>
               <div className="flex items-center gap-2 mb-4">
                 <div className="w-10 h-10 rounded-full bg-lavender flex items-center justify-center">
-                  <Heart className="w-5 h-5 text-white fill-white" />
+                  <Heart className="w-5 h-5 text-white fill-lavender" />
                 </div>
                 <span className="text-xl font-semibold">CareConnect</span>
               </div>
-              <p className="text-white/60 text-sm leading-relaxed">
+              <p className="text-lavender/60 text-sm leading-relaxed">
                 Supporting caregivers, one day at a time. We're here to make
                 your journey a little easier.
               </p>
@@ -428,8 +466,8 @@ export function LandingPage({ onGetStarted }: LandingPageProps) {
                   (link) => (
                     <li key={link}>
                       <button
-                        onClick={onGetStarted}
-                        className="text-white/60 hover:text-lavender transition-colors text-sm"
+                        onClick={() => handleAuthOpen("signup")}
+                        className="text-lavender/60 hover:text-lavender transition-colors text-sm"
                       >
                         {link}
                       </button>
@@ -450,7 +488,7 @@ export function LandingPage({ onGetStarted }: LandingPageProps) {
                   "Contact Us",
                 ].map((link) => (
                   <li key={link}>
-                    <button className="text-white/60 hover:text-lavender transition-colors text-sm">
+                    <button className="text-lavender/60 hover:text-lavender transition-colors text-sm">
                       {link}
                     </button>
                   </li>
@@ -461,24 +499,33 @@ export function LandingPage({ onGetStarted }: LandingPageProps) {
             {/* Contact */}
             <div>
               <h4 className="font-semibold mb-4">Get Help</h4>
-              <p className="text-white/60 text-sm mb-2">
+              <p className="text-lavender/60 text-sm mb-2">
                 Alzheimer's Association Helpline
               </p>
               <p className="text-lavender font-semibold mb-4">1-800-272-3900</p>
-              <p className="text-white/60 text-sm">
+              <p className="text-lavender/60 text-sm">
                 Available 24/7 for support
               </p>
             </div>
           </div>
 
-          <div className="border-t border-white/10 mt-12 pt-8 text-center">
-            <p className="text-white/40 text-sm">
+          <div className="border-t border-lavender/10 mt-12 pt-8 text-center">
+            <p className="text-lavender/40 text-sm">
               © 2024 CareConnect. All rights reserved. Built with compassion for
               caregivers everywhere.
             </p>
           </div>
         </div>
       </footer>
+
+      {/* Auth Modal */}
+      <AuthModal
+        isOpen={isAuthModalOpen}
+        onClose={() => setIsAuthModalOpen(false)}
+        view={authView}
+        onViewChange={setAuthView}
+        onAuthSuccess={onGetStarted}
+      />
     </div>
   );
 }
