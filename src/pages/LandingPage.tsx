@@ -154,7 +154,7 @@ export function LandingPage({ onGetStarted }: LandingPageProps) {
               <Button
                 variant="ghost"
                 onClick={() => handleAuthOpen("login")}
-                className="hidden sm:flex text-charcoal hover:text-lavender transition-colors font-medium"
+                className="hidden sm:flex text-charcoal hover:text-white transition-colors rounded-full font-medium"
               >
                 Login
               </Button>
