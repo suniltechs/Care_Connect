@@ -9,7 +9,7 @@ The platform focuses on **empathy, simplicity, accessibility, and privacy**, rec
 
 ## 🌐 Live Demo
 
-🔗 **Live Application**: https://careconnecting.netlify.app/
+🔗 **Live Application**: https://careconnecting.netlify.app/ </br>
 🎥 **Presentation**: https://drive.google.com/file/d/1XqomsZifc74p_ilv-t9q3twPz09Scekm/view?usp=sharing
 
 ---
