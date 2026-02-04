@@ -6,6 +6,7 @@ import {
   User,
   Calendar,
   BookOpen,
+  Shield,
   Users,
   Sparkles,
   Bell,
@@ -33,7 +34,7 @@ const navItems = [
   { id: "resources", label: "Resources", icon: BookOpen },
   { id: "community", label: "Community", icon: Users },
   { id: "wellness", label: "Mental Health", icon: Sparkles },
-  // { id: "privacy", label: "Privacy & Accessibility", icon: Shield },
+  { id: "privacy", label: "Privacy & Accessibility", icon: Shield },
 ];
 
 export function Navigation({ currentPage, onPageChange }: NavigationProps) {
@@ -79,7 +80,7 @@ export function Navigation({ currentPage, onPageChange }: NavigationProps) {
           </div>
 
           {/* Desktop Navigation */}
-          <div className="hidden lg:flex items-center gap-1 ml-16 xl:gap-2">
+          <div className="hidden lg:flex items-center gap-1 ml-[12px] xl:gap-2">
             {navItems.map((item) => {
               const Icon = item.icon;
               const isActive = currentPage === item.id;
