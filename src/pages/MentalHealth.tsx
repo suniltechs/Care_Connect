@@ -580,7 +580,7 @@ export function MentalHealth() {
                     </p>
                     <a
                       href="tel:988"
-                      className="inline-flex items-center gap-2 bg-white text-soft-coral px-6 py-3 rounded-full font-semibold hover:bg-off-white transition-colors"
+                      className="inline-flex items-center gap-2 bg-white text-black px-6 py-3 rounded-full font-semibold hover:bg-off-white transition-colors"
                     >
                       <Phone className="w-5 h-5" />
                       Call or Text 988

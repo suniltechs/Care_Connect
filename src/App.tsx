@@ -1,44 +1,45 @@
-import { useState, useEffect } from 'react';
-import { Navigation } from '@/components/Navigation';
-import { LandingPage } from '@/pages/LandingPage';
-import { Dashboard } from '@/pages/Dashboard';
-import { PatientProfile } from '@/pages/PatientProfile';
-import { CarePlan } from '@/pages/CarePlan';
-import { ResourceLibrary } from '@/pages/ResourceLibrary';
-import { CommunityForum } from '@/pages/CommunityForum';
-import { MentalHealth } from '@/pages/MentalHealth';
-import { PrivacyAccessibility } from '@/pages/PrivacyAccessibility';
-import './App.css';
+import { useState, useEffect } from "react";
+import { Navigation } from "@/components/Navigation";
+import { LandingPage } from "@/pages/LandingPage";
+import { Dashboard } from "@/pages/Dashboard";
+import { PatientProfile } from "@/pages/PatientProfile";
+import { CarePlan } from "@/pages/CarePlan";
+import { ResourceLibrary } from "@/pages/ResourceLibrary";
+import { CommunityForum } from "@/pages/CommunityForum";
+import { MentalHealth } from "@/pages/MentalHealth";
+import { PrivacyAccessibility } from "@/pages/PrivacyAccessibility";
+import { Footer } from "@/components/Footer";
+import "./App.css";
 
 function App() {
-  const [currentPage, setCurrentPage] = useState('landing');
+  const [currentPage, setCurrentPage] = useState("landing");
 
   // Scroll to top when page changes
   useEffect(() => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    window.scrollTo({ top: 0, behavior: "smooth" });
   }, [currentPage]);
 
   const handleGetStarted = () => {
-    setCurrentPage('dashboard');
+    setCurrentPage("dashboard");
   };
 
   const renderPage = () => {
     switch (currentPage) {
-      case 'landing':
+      case "landing":
         return <LandingPage onGetStarted={handleGetStarted} />;
-      case 'dashboard':
+      case "dashboard":
         return <Dashboard />;
-      case 'profile':
+      case "profile":
         return <PatientProfile />;
-      case 'careplan':
+      case "careplan":
         return <CarePlan />;
-      case 'resources':
+      case "resources":
         return <ResourceLibrary />;
-      case 'community':
+      case "community":
         return <CommunityForum />;
-      case 'wellness':
+      case "wellness":
         return <MentalHealth />;
-      case 'privacy':
+      case "privacy":
         return <PrivacyAccessibility />;
       default:
         return <LandingPage onGetStarted={handleGetStarted} />;
@@ -47,15 +48,11 @@ function App() {
 
   return (
     <div className="min-h-screen bg-off-white">
-      {currentPage !== 'landing' && (
-        <Navigation 
-          currentPage={currentPage} 
-          onPageChange={setCurrentPage} 
-        />
+      {currentPage !== "landing" && (
+        <Navigation currentPage={currentPage} onPageChange={setCurrentPage} />
       )}
-      <main className="animate-fade-in">
-        {renderPage()}
-      </main>
+      <main className="animate-fade-in">{renderPage()}</main>
+      <Footer onPageChange={setCurrentPage} />
     </div>
   );
 }

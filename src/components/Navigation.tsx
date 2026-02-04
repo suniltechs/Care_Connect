@@ -8,7 +8,6 @@ import {
   BookOpen,
   Users,
   Sparkles,
-  Shield,
   Bell,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -20,6 +19,7 @@ import {
   SheetTitle,
   SheetDescription,
 } from "@/components/ui/sheet";
+import { NotificationTray } from "./NotificationTray";
 
 interface NavigationProps {
   currentPage: string;
@@ -33,12 +33,13 @@ const navItems = [
   { id: "resources", label: "Resources", icon: BookOpen },
   { id: "community", label: "Community", icon: Users },
   { id: "wellness", label: "Mental Health", icon: Sparkles },
-  { id: "privacy", label: "Privacy & Accessibility", icon: Shield },
+  // { id: "privacy", label: "Privacy & Accessibility", icon: Shield },
 ];
 
 export function Navigation({ currentPage, onPageChange }: NavigationProps) {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isNotificationsOpen, setIsNotificationsOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -78,7 +79,7 @@ export function Navigation({ currentPage, onPageChange }: NavigationProps) {
           </div>
 
           {/* Desktop Navigation */}
-          <div className="hidden lg:flex items-center gap-1 xl:gap-2">
+          <div className="hidden lg:flex items-center gap-1 ml-16 xl:gap-2">
             {navItems.map((item) => {
               const Icon = item.icon;
               const isActive = currentPage === item.id;
@@ -101,10 +102,18 @@ export function Navigation({ currentPage, onPageChange }: NavigationProps) {
 
           {/* Right Actions Container */}
           <div className="flex-1 flex justify-end items-center gap-2">
-            <button className="relative p-2 rounded-full hover:bg-warm-beige transition-colors">
+            <button
+              onClick={() => setIsNotificationsOpen(true)}
+              className="relative p-2 rounded-full hover:bg-warm-beige transition-colors"
+            >
               <Bell className="w-5 h-5 text-charcoal" />
               <span className="absolute top-1 right-1 w-2 h-2 bg-soft-coral rounded-full" />
             </button>
+
+            <NotificationTray
+              isOpen={isNotificationsOpen}
+              onClose={() => setIsNotificationsOpen(false)}
+            />
 
             {/* Mobile Menu */}
             <Sheet open={isMobileMenuOpen} onOpenChange={setIsMobileMenuOpen}>

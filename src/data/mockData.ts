@@ -5,7 +5,8 @@ import type {
   CareTask, 
   Appointment,
   BreathingExercise,
-  MoodEntry 
+  MoodEntry,
+  AppNotification 
 } from '@/types';
 
 export const mockPatient: Patient = {
@@ -87,7 +88,7 @@ export const mockResources: Resource[] = [
     type: 'article',
     readTime: '8 min read',
     isBookmarked: true,
-    thumbnail: '/resource-1.jpg'
+    thumbnail: 'https://images.unsplash.com/photo-1559757175-5700dde675bc?auto=format&fit=crop&q=80&w=800'
   },
   {
     id: '2',
@@ -97,7 +98,7 @@ export const mockResources: Resource[] = [
     type: 'guide',
     readTime: '5 min read',
     isBookmarked: false,
-    thumbnail: '/resource-2.jpg'
+    thumbnail: 'https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&q=80&w=800'
   },
   {
     id: '3',
@@ -107,7 +108,7 @@ export const mockResources: Resource[] = [
     type: 'article',
     readTime: '6 min read',
     isBookmarked: true,
-    thumbnail: '/resource-3.jpg'
+    thumbnail: 'https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?auto=format&fit=crop&q=80&w=800'
   },
   {
     id: '4',
@@ -117,7 +118,7 @@ export const mockResources: Resource[] = [
     type: 'video',
     readTime: '4 min watch',
     isBookmarked: false,
-    thumbnail: '/resource-4.jpg'
+    thumbnail: 'https://images.unsplash.com/photo-1576765608535-5f04d1e3f289?auto=format&fit=crop&q=80&w=800'
   },
   {
     id: '5',
@@ -127,7 +128,7 @@ export const mockResources: Resource[] = [
     type: 'video',
     readTime: '12 min watch',
     isBookmarked: false,
-    thumbnail: '/resource-5.jpg'
+    thumbnail: 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?auto=format&fit=crop&q=80&w=800'
   },
   {
     id: '6',
@@ -137,7 +138,7 @@ export const mockResources: Resource[] = [
     type: 'guide',
     readTime: '7 min read',
     isBookmarked: true,
-    thumbnail: '/resource-6.jpg'
+    thumbnail: 'https://images.unsplash.com/photo-1490818387583-1baba5e638af?auto=format&fit=crop&q=80&w=800'
   },
   {
     id: '7',
@@ -147,7 +148,7 @@ export const mockResources: Resource[] = [
     type: 'article',
     readTime: '10 min read',
     isBookmarked: false,
-    thumbnail: '/resource-7.jpg'
+    thumbnail: 'https://images.unsplash.com/photo-1589829545856-d10d557cf95f?auto=format&fit=crop&q=80&w=800'
   },
   {
     id: '8',
@@ -157,7 +158,7 @@ export const mockResources: Resource[] = [
     type: 'article',
     readTime: '5 min read',
     isBookmarked: false,
-    thumbnail: '/resource-8.jpg'
+    thumbnail: 'https://images.unsplash.com/photo-1541781774459-bb2af2f05b55?auto=format&fit=crop&q=80&w=800'
   }
 ];
 
@@ -337,7 +338,71 @@ export const mockTodaysTasks: CareTask[] = [
     category: 'hygiene',
     time: '8:00 PM',
     completed: false
-  }
+  },
+  {
+    id: '9',
+    title: 'Hydration check - offer glass of water',
+    category: 'activity',
+    time: '10:30 AM',
+    completed: true
+  },
+  {
+    id: '10',
+    title: 'Blood pressure and vitals check',
+    category: 'medication',
+    time: '11:00 AM',
+    completed: false
+  },
+  {
+    id: '11',
+    title: 'Afternoon power nap (30 mins)',
+    category: 'activity',
+    time: '1:00 PM',
+    completed: false
+  },
+  // {
+  //   id: '12',
+  //   title: 'Lunch - Vegetable soup and fruit',
+  //   category: 'meal',
+  //   time: '12:30 PM',
+  //   completed: false
+  // },
+  {
+    id: '13',
+    title: 'Gentle stretching or chair yoga',
+    category: 'activity',
+    time: '4:00 PM',
+    completed: false
+  },
+  {
+    id: '14',
+    title: 'Read a book or listen to music',
+    category: 'activity',
+    time: '7:00 PM',
+    completed: false
+  },
+  {
+    id: '15',
+    title: 'Final hydration check',
+    category: 'activity',
+    time: '8:30 PM',
+    completed: false
+  },
+  {
+    id: '16',
+    title: 'Cognitive exercise - Puzzle or word games',
+    category: 'activity',
+    time: '2:30 PM',
+    completed: false
+  },
+  {
+    id: '17',
+    title: 'Skin care - Apply moisturizing lotion',
+    category: 'hygiene',
+    time: '8:15 PM',
+    completed: false
+  },
+  
 ];
 
 export const mockAppointments: Appointment[] = [
@@ -430,3 +495,38 @@ export const topicLabels: Record<string, string> = {
   'tips': 'Tips & Tricks',
   'late-stage': 'Late Stage Care'
 };
+
+export const mockNotifications: AppNotification[] = [
+  {
+    id: '1',
+    title: 'Medication Reminder',
+    description: 'It\'s time for Margaret\'s morning Donepezil.',
+    time: '8:00 AM',
+    type: 'medication',
+    isRead: false
+  },
+  {
+    id: '2',
+    title: 'Upcoming Appointment',
+    description: 'Neurology checkup at 10:00 AM today.',
+    time: '2 hours ago',
+    type: 'appointment',
+    isRead: true
+  },
+  {
+    id: '3',
+    title: 'Mood Alert',
+    description: 'Margaret has been calm for 3 consecutive days.',
+    time: 'Yesterday',
+    type: 'info',
+    isRead: true
+  },
+  {
+    id: '4',
+    title: 'Community Reply',
+    description: 'Someone replied to your post about sundowning.',
+    time: '5 mins ago',
+    type: 'info',
+    isRead: false
+  }
+];

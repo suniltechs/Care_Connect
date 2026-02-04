@@ -296,7 +296,7 @@ export function PatientProfile() {
                       Medical History Details
                     </CardTitle>
                   </CardHeader>
-                  <CardContent className="space-y-6">
+                  <CardContent className="space-y-9">
                     <div>
                       <h4 className="font-medium text-charcoal mb-3">
                         Current Conditions

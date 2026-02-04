@@ -69,17 +69,17 @@ export function ResourceLibrary() {
   const getCategoryColor = (category: string) => {
     switch (category) {
       case "understanding":
-        return "bg-lavender/10 text-lavender";
+        return "bg-lavender text-white shadow-sm";
       case "daily-care":
-        return "bg-mint/20 text-charcoal";
+        return "bg-mint text-charcoal shadow-sm";
       case "safety":
-        return "bg-soft-blue/20 text-charcoal";
+        return "bg-soft-blue text-white shadow-sm";
       case "self-care":
-        return "bg-soft-coral/20 text-charcoal";
+        return "bg-soft-coral text-white shadow-sm";
       case "legal":
-        return "bg-pale-yellow/50 text-charcoal";
+        return "bg-pale-yellow text-charcoal shadow-sm";
       default:
-        return "bg-warm-beige text-charcoal";
+        return "bg-white/90 text-charcoal shadow-sm";
     }
   };
 
@@ -169,22 +169,27 @@ export function ResourceLibrary() {
               key={resource.id}
               className="bg-white border-0 shadow-card card-hover overflow-hidden group cursor-pointer"
             >
-              {/* Thumbnail Placeholder */}
-              <div className="aspect-video bg-gradient-to-br from-lavender/20 to-soft-blue/20 flex items-center justify-center relative overflow-hidden">
-                <div className="w-16 h-16 rounded-full bg-white/50 flex items-center justify-center">
-                  {getTypeIcon(resource.type)}
-                </div>
+              {/* Thumbnail Image */}
+              <div className="aspect-video relative overflow-hidden transition-all duration-300">
+                <img
+                  src={resource.thumbnail}
+                  alt={resource.title}
+                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                />
+                <div className="absolute inset-0 bg-black/5 group-hover:bg-black/0 transition-colors duration-500" />
+
                 <div
-                  className={`absolute top-3 left-3 px-2 py-1 rounded-lg text-xs font-medium ${getCategoryColor(resource.category)}`}
+                  className={`absolute top-3 left-3 px-3 py-1 rounded-full text-[10px] font-bold tracking-wider uppercase backdrop-blur-md ${getCategoryColor(resource.category)}`}
                 >
                   {categoryLabels[resource.category]}
                 </div>
+
                 <button
                   onClick={(e) => {
                     e.stopPropagation();
                     toggleBookmark(resource.id);
                   }}
-                  className="absolute top-3 right-3 w-8 h-8 rounded-full bg-white/80 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity"
+                  className="absolute top-3 right-3 w-8 h-8 rounded-full bg-white/80 backdrop-blur-sm flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all hover:bg-white"
                 >
                   <Heart
                     className={`w-4 h-4 ${resource.isBookmarked ? "fill-lavender text-lavender" : "text-charcoal"}`}

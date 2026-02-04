@@ -173,8 +173,8 @@ export function Dashboard() {
                 </div>
               </CardHeader>
               <CardContent>
-                <div className="space-y-2">
-                  {tasks.map((task) => (
+                <div className="space-y-2.5">
+                  {tasks.slice(0, 11).map((task) => (
                     <div
                       key={task.id}
                       onClick={() => toggleTask(task.id)}
@@ -315,7 +315,7 @@ export function Dashboard() {
                 </div>
               </CardHeader>
               <CardContent>
-                <div className="space-y-3">
+                <div className="space-y-4">
                   {mockForumPosts.slice(0, 2).map((post) => (
                     <div key={post.id} className="p-3 bg-warm-beige rounded-lg">
                       <p className="font-medium text-charcoal text-sm mb-1 line-clamp-1">

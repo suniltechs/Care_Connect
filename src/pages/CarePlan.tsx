@@ -70,7 +70,7 @@ const dailyRoutines = {
     { task: "Take morning medications", time: "8:00 AM" },
     { task: "Breakfast", time: "8:30 AM" },
     { task: "Morning walk", time: "9:00 AM" },
-    { task: "Calm activity (music/photos)", time: "10:00 AM" },
+    // { task: "Calm activity (music/photos)", time: "10:00 AM" },
   ],
   afternoon: [
     { task: "Light lunch", time: "12:30 PM" },
@@ -85,7 +85,7 @@ const dailyRoutines = {
     { task: "Relaxing activity", time: "6:30 PM" },
     { task: "Evening hygiene routine", time: "8:00 PM" },
     { task: "Bedtime routine", time: "8:30 PM" },
-    { task: "Lights out", time: "9:00 PM" },
+    // { task: "Lights out", time: "9:00 PM" },
   ],
 };
 
@@ -301,7 +301,13 @@ export function CarePlan() {
             <div className="grid lg:grid-cols-3 gap-6">
               {["morning", "afternoon", "evening"].map((period) => {
                 const periodTasks = tasks.filter((t) => {
-                  const hour = parseInt(t.time.split(":")[0]);
+                  const [time, periodDay] = t.time.split(" ");
+                  let hour = parseInt(time.split(":")[0]);
+
+                  // Convert to 24-hour format for filtering
+                  if (periodDay === "PM" && hour !== 12) hour += 12;
+                  if (periodDay === "AM" && hour === 12) hour = 0;
+
                   if (period === "morning") return hour < 12;
                   if (period === "afternoon") return hour >= 12 && hour < 17;
                   return hour >= 17;

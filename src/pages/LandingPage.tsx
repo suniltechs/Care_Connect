@@ -9,9 +9,18 @@ import {
   ArrowRight,
   CheckCircle2,
   Menu,
+  LayoutDashboard,
+  Info,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import {
+  Sheet,
+  SheetContent,
+  SheetTrigger,
+  SheetHeader,
+  SheetTitle,
+  SheetDescription,
+} from "@/components/ui/sheet";
 import { useState } from "react";
 import { AuthModal } from "@/components/auth/AuthModal";
 
@@ -20,10 +29,10 @@ interface LandingPageProps {
 }
 
 const navLinks = [
-  { label: "Dashboard", href: "#" },
-  { label: "Features", href: "#features" },
-  { label: "About", href: "#about" },
-  { label: "Support", href: "#support" },
+  { label: "Dashboard", href: "#", icon: LayoutDashboard },
+  { label: "Features", href: "#features", icon: Sparkles },
+  { label: "About", href: "#about", icon: Info },
+  { label: "Support", href: "#support", icon: Heart },
 ];
 
 const features = [
@@ -163,43 +172,74 @@ export function LandingPage({ onGetStarted }: LandingPageProps) {
                     <Menu className="w-6 h-6" />
                   </Button>
                 </SheetTrigger>
-                <SheetContent side="right" className="w-72 bg-off-white">
-                  <div className="flex flex-col gap-4 mt-8">
-                    {navLinks.map((link) => (
-                      <a
-                        key={link.label}
-                        href={link.href}
-                        onClick={(e) => {
+                <SheetContent
+                  side="right"
+                  className="w-80 bg-off-white flex flex-col p-6"
+                >
+                  <SheetHeader className="text-left mb-6">
+                    <div className="flex items-center gap-2">
+                      <div className="w-10 h-10 rounded-full bg-lavender flex items-center justify-center">
+                        <Heart className="w-5 h-5 text-white fill-white" />
+                      </div>
+                      <SheetTitle className="text-xl font-semibold text-charcoal">
+                        CareConnect
+                      </SheetTitle>
+                    </div>
+                    <SheetDescription className="text-sm text-medium-gray mt-1">
+                      Compassionate Care Support
+                    </SheetDescription>
+                  </SheetHeader>
+
+                  <div className="flex flex-col gap-2">
+                    {navLinks.map((link) => {
+                      const Icon = link.icon;
+                      return (
+                        <button
+                          key={link.label}
+                          onClick={(e) => {
+                            setIsMobileMenuOpen(false);
+                            if (link.label === "Dashboard") {
+                              e.preventDefault();
+                              onGetStarted();
+                            } else if (link.href.startsWith("#")) {
+                              const id = link.href.replace("#", "");
+                              const element = document.getElementById(id);
+                              if (element) {
+                                element.scrollIntoView({ behavior: "smooth" });
+                              }
+                            }
+                          }}
+                          className="flex items-center gap-3 px-4 py-3 rounded-xl text-left transition-all text-charcoal hover:bg-warm-beige"
+                        >
+                          <Icon className="w-5 h-5" />
+                          <span className="font-medium text-lg">
+                            {link.label}
+                          </span>
+                        </button>
+                      );
+                    })}
+
+                    <div className="mt-4 pt-4 border-t border-charcoal/5 flex flex-col gap-3">
+                      <Button
+                        variant="ghost"
+                        onClick={() => {
                           setIsMobileMenuOpen(false);
-                          if (link.label === "Dashboard") {
-                            e.preventDefault();
-                            onGetStarted();
-                          }
+                          handleAuthOpen("login");
                         }}
-                        className="text-lg font-medium text-charcoal hover:text-lavender p-2"
+                        className="flex items-center gap-3 px-4 py-3 rounded-xl text-left justify-start h-auto font-medium text-charcoal hover:bg-warm-beige"
                       >
-                        {link.label}
-                      </a>
-                    ))}
-                    <Button
-                      variant="ghost"
-                      onClick={() => {
-                        setIsMobileMenuOpen(false);
-                        handleAuthOpen("login");
-                      }}
-                      className="text-lg font-medium text-charcoal hover:text-lavender p-2 justify-start"
-                    >
-                      Login
-                    </Button>
-                    <Button
-                      onClick={() => {
-                        setIsMobileMenuOpen(false);
-                        handleAuthOpen("signup");
-                      }}
-                      className="bg-lavender hover:bg-deep-lavender text-white rounded-full mt-4"
-                    >
-                      Get Started
-                    </Button>
+                        Login
+                      </Button>
+                      <Button
+                        onClick={() => {
+                          setIsMobileMenuOpen(false);
+                          handleAuthOpen("signup");
+                        }}
+                        className="bg-lavender hover:bg-deep-lavender text-white rounded-full py-6 text-lg"
+                      >
+                        Get Started
+                      </Button>
+                    </div>
                   </div>
                 </SheetContent>
               </Sheet>
@@ -439,84 +479,6 @@ export function LandingPage({ onGetStarted }: LandingPageProps) {
           </div>
         </div>
       </section>
-
-      {/* Footer */}
-      <footer className="bg-charcoal text-lavender py-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12">
-            {/* Brand */}
-            <div>
-              <div className="flex items-center gap-2 mb-4">
-                <div className="w-10 h-10 rounded-full bg-lavender flex items-center justify-center">
-                  <Heart className="w-5 h-5 text-white fill-lavender" />
-                </div>
-                <span className="text-xl font-semibold">CareConnect</span>
-              </div>
-              <p className="text-lavender/60 text-sm leading-relaxed">
-                Supporting caregivers, one day at a time. We're here to make
-                your journey a little easier.
-              </p>
-            </div>
-
-            {/* Quick Links */}
-            <div>
-              <h4 className="font-semibold mb-4">Quick Links</h4>
-              <ul className="space-y-2">
-                {["Dashboard", "Patient Profile", "Care Plan", "Resources"].map(
-                  (link) => (
-                    <li key={link}>
-                      <button
-                        onClick={() => handleAuthOpen("signup")}
-                        className="text-lavender/60 hover:text-lavender transition-colors text-sm"
-                      >
-                        {link}
-                      </button>
-                    </li>
-                  ),
-                )}
-              </ul>
-            </div>
-
-            {/* Resources */}
-            <div>
-              <h4 className="font-semibold mb-4">Resources</h4>
-              <ul className="space-y-2">
-                {[
-                  "Help Center",
-                  "Privacy Policy",
-                  "Terms of Service",
-                  "Contact Us",
-                ].map((link) => (
-                  <li key={link}>
-                    <button className="text-lavender/60 hover:text-lavender transition-colors text-sm">
-                      {link}
-                    </button>
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            {/* Contact */}
-            <div>
-              <h4 className="font-semibold mb-4">Get Help</h4>
-              <p className="text-lavender/60 text-sm mb-2">
-                Alzheimer's Association Helpline
-              </p>
-              <p className="text-lavender font-semibold mb-4">1-800-272-3900</p>
-              <p className="text-lavender/60 text-sm">
-                Available 24/7 for support
-              </p>
-            </div>
-          </div>
-
-          <div className="border-t border-lavender/10 mt-12 pt-8 text-center">
-            <p className="text-lavender/40 text-sm">
-              © 2024 CareConnect. All rights reserved. Built with compassion for
-              caregivers everywhere.
-            </p>
-          </div>
-        </div>
-      </footer>
 
       {/* Auth Modal */}
       <AuthModal
